@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: `.specs/features/calculadora/design.md`
-**Status**: Approved
+**Status**: In Progress (all 26 tasks gated, waiting for the user commit, proofs and the Verifier)
 **Approved**: 2026-11-02 - user: "aprovado, com ERR-03"
 **Build**: `npm run build; npm run lint`
 **Run unit**: `npx vitest run --reporter=verbose`
@@ -158,8 +158,8 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `npx vitest run` exits 0 with no tests yet
-- [ ] Thresholds of 90 are set for `src/core/**`
+- [x] `npx vitest run` exits 0 with no tests yet
+- [x] Thresholds of 90 are set for `src/core/**`
 
 **Tests**: none
 **Gate**: `npx vitest run` exits 0
@@ -197,7 +197,7 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `npx prettier --check .` exits 0
+- [x] `npx prettier --check .` exits 0
 
 **Tests**: none
 **Gate**: `npx prettier --check .` exits 0
@@ -216,9 +216,9 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] Types exported and match design.md
-- [ ] No TypeScript errors
-- [ ] Gate check passes: `npm run build; npm run lint`
+- [x] Types exported and match design.md
+- [x] No TypeScript errors
+- [x] Gate check passes: `npm run build; npm run lint`
 
 **Tests**: none
 **Gate**: build
@@ -237,11 +237,11 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] CALC-10 AC17 tests cover integers, decimals and negatives for each operation
-- [ ] `divide` by `0` throws `DivisionByZeroError`; by `0.0` and `-0` too
-- [ ] `applyOperator` throws `NonFiniteResultError` when the result is `Infinity`
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 9 tests in `tests/operations.test.ts`
+- [x] CALC-10 AC17 tests cover integers, decimals and negatives for each operation
+- [x] `divide` by `0` throws `DivisionByZeroError`; by `0.0` and `-0` too
+- [x] `applyOperator` throws `NonFiniteResultError` when the result is `Infinity`
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 9 tests in `tests/operations.test.ts`
 
 **Tests**: unit
 **Gate**: quick
@@ -260,12 +260,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `0.1 + 0.2` formats as `0.3` (CALC-11 AC18)
-- [ ] `1 / 3` formats as `0.3333333333`
-- [ ] A result with more than 15 digits formats as exponential with up to 10 decimals, for example `1.2345678901e+20` (CALC-11 AC19)
-- [ ] `displaySize` returns `normal`, `small` or `tiny` by text length (UI-06 AC6, AC7)
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 10 tests in `tests/format.test.ts`
+- [x] `0.1 + 0.2` formats as `0.3` (CALC-11 AC18)
+- [x] `1 / 3` formats as `0.3333333333`
+- [x] A result with more than 15 digits formats as exponential with up to 10 decimals, for example `1.2345678901e+20` (CALC-11 AC19)
+- [x] `displaySize` returns `normal`, `small` or `tiny` by text length (UI-06 AC6, AC7)
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 10 tests in `tests/format.test.ts`
 
 **Tests**: unit
 **Gate**: quick
@@ -284,12 +284,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] Digit appends; `0` then `0` stays `0`; `0` then `7` shows `7`
-- [ ] `.` appends once, a second `.` is ignored, `.` first shows `0.`
-- [ ] 15 digits block more digits, and `.` is still accepted at 15 digits (EDGE-1)
-- [ ] Reducer returns a new object and never mutates its input
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 9 new tests
+- [x] Digit appends; `0` then `0` stays `0`; `0` then `7` shows `7`
+- [x] `.` appends once, a second `.` is ignored, `.` first shows `0.`
+- [x] 15 digits block more digits, and `.` is still accepted at 15 digits (EDGE-1)
+- [x] Reducer returns a new object and never mutates its input
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 9 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -308,12 +308,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `2 + 3 +` shows `5` with `+` pending
-- [ ] `2 + 3 × 4 =` is not tested here; `2 + 3 ×` shows `5`
-- [ ] `+` then `×` replaces the operator without calculating
-- [ ] `-` as the first operator with `0` is a subtraction of `0` (EDGE-2)
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 6 new tests
+- [x] `2 + 3 +` shows `5` with `+` pending
+- [x] `2 + 3 × 4 =` is not tested here; `2 + 3 ×` shows `5`
+- [x] `+` then `×` replaces the operator without calculating
+- [x] `-` as the first operator with `0` is a subtraction of `0` (EDGE-2)
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 6 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -332,12 +332,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `2 + 3 × 4 =` shows `20`
-- [ ] `2 + 3 = = =` shows `5`, `8`, `11`
-- [ ] `5 + =` shows `10`; `=` with no operator and no last operation changes nothing
-- [ ] Digit after a result starts a new calculation; operator after a result continues from it
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 8 new tests
+- [x] `2 + 3 × 4 =` shows `20`
+- [x] `2 + 3 = = =` shows `5`, `8`, `11`
+- [x] `5 + =` shows `10`; `=` with no operator and no last operation changes nothing
+- [x] Digit after a result starts a new calculation; operator after a result continues from it
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 8 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -356,13 +356,13 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `5 ÷ 0 =` sets the error message
-- [ ] Operators, `=`, `±`, `%`, `⌫`, `CE` are ignored during the error
-- [ ] `C` clears the error; a digit clears it and starts a new calculation
-- [ ] `=` after an error cleared by `C` keeps `0` (EDGE-4)
-- [ ] `999999999999999 × 999999999999999 =` followed by repeated `=` ends in `Resultado fora do limite` (ERR-03 AC12)
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 6 new tests
+- [x] `5 ÷ 0 =` sets the error message
+- [x] Operators, `=`, `±`, `%`, `⌫`, `CE` are ignored during the error
+- [x] `C` clears the error; a digit clears it and starts a new calculation
+- [x] `=` after an error cleared by `C` keeps `0` (EDGE-4)
+- [x] `999999999999999 × 999999999999999 =` followed by repeated `=` ends in `Resultado fora do limite` (ERR-03 AC12)
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 6 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -381,12 +381,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `C` resets every field; `CE` clears only the current number; `CE` after a result acts as `C`
-- [ ] `⌫` removes the last character, gives `0` when nothing is left, and keeps a result
-- [ ] `±` flips the sign and leaves `0` alone
-- [ ] `%` divides the current number by 100, and `50 + 10 %` becomes `50 + 0.1`
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 10 new tests
+- [x] `C` resets every field; `CE` clears only the current number; `CE` after a result acts as `C`
+- [x] `⌫` removes the last character, gives `0` when nothing is left, and keeps a result
+- [x] `±` flips the sign and leaves `0` alone
+- [x] `%` divides the current number by 100, and `50 + 10 %` becomes `50 + 0.1`
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 10 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -405,10 +405,10 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `1 2 ×` gives `12 ×`; `2 + 3 =` gives `2 + 3 =`
-- [ ] `activeOperator` is `×` after `12 ×` and `null` after the next digit
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 4 new tests; coverage of `src/core/` is at least 90%
+- [x] `1 2 ×` gives `12 ×`; `2 + 3 =` gives `2 + 3 =`
+- [x] `activeOperator` is `×` after `12 ×` and `null` after the next digit
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 4 new tests; coverage of `src/core/` is at least 90%
 
 **Tests**: unit
 **Gate**: quick
@@ -427,10 +427,10 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] CALC-12 AC20 test passes on the current sources
-- [ ] The test fails when a temp file with `eval(` is added (checked once by hand, then removed)
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: 1 new test
+- [x] CALC-12 AC20 test passes on the current sources
+- [x] The test fails when a temp file with `eval(` is added (checked once by hand, then removed)
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: 1 new test
 
 **Tests**: unit
 **Gate**: quick
@@ -449,12 +449,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] Order and labels match the grid in UI-01
-- [ ] Every button has a non-empty `ariaLabel`, for example `Dividir` and `Apagar último dígito`
-- [ ] Each button's action matches its label (UI-02)
-- [ ] Operators and `=` have a `kind` different from digits (UI-05)
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 4 new tests
+- [x] Order and labels match the grid in UI-01
+- [x] Every button has a non-empty `ariaLabel`, for example `Dividir` and `Apagar último dígito`
+- [x] Each button's action matches its label (UI-02)
+- [x] Operators and `=` have a `kind` different from digits (UI-05)
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 4 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -473,11 +473,11 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `createButtons` renders one `<button>` per `BUTTONS` item and returns a map by label
-- [ ] `flashButton` adds `pressed` and removes it after 120 ms (KEY-04 AC7, unit)
-- [ ] `markActive` sets `aria-pressed` and a class on the active operator only
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 1 new test
+- [x] `createButtons` renders one `<button>` per `BUTTONS` item and returns a map by label
+- [x] `flashButton` adds `pressed` and removes it after 120 ms (KEY-04 AC7, unit)
+- [x] `markActive` sets `aria-pressed` and a class on the active operator only
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 1 new test
 
 **Tests**: unit
 **Gate**: quick
@@ -496,11 +496,11 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] Each key in PRD §7 maps to the action in KEY-01 to KEY-03
-- [ ] `Enter` and ` ` with `targetIsButton = true` return `null` (KEY-05)
-- [ ] Unmapped keys return `null`
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 8 new tests
+- [x] Each key in PRD §7 maps to the action in KEY-01 to KEY-03
+- [x] `Enter` and ` ` with `targetIsButton = true` return `null` (KEY-05)
+- [x] Unmapped keys return `null`
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 8 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -519,9 +519,9 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] The handler passes `event.target instanceof HTMLButtonElement` to `resolveKey`
-- [ ] Returns a function that removes the listener
-- [ ] Gate check passes: `npm run build; npm run lint; npm run coverage`
+- [x] The handler passes `event.target instanceof HTMLButtonElement` to `resolveKey`
+- [x] Returns a function that removes the listener
+- [x] Gate check passes: `npm run build; npm run lint; npm run coverage`
 
 **Tests**: none
 **Gate**: build
@@ -540,9 +540,9 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] Display shows `error` when it is set
-- [ ] `data-size` follows `displaySize` of the shown text
-- [ ] Gate check passes: `npm run build; npm run lint; npm run coverage`
+- [x] Display shows `error` when it is set
+- [x] `data-size` follows `displaySize` of the shown text
+- [x] Gate check passes: `npm run build; npm run lint; npm run coverage`
 
 **Tests**: none
 **Gate**: build
@@ -561,9 +561,9 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] A11Y-02 AC2 test reads `index.html` and finds `aria-live="polite"` on the display
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 1 new test
+- [x] A11Y-02 AC2 test reads `index.html` and finds `aria-live="polite"` on the display
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 1 new test
 
 **Tests**: unit
 **Gate**: quick
@@ -582,12 +582,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] Every `--<role>-fg` over `--<role>-bg` pair has contrast >= 4.5 in both themes (A11Y-04)
-- [ ] The dark block sits inside `@media (prefers-color-scheme: dark)` (THEME-01)
-- [ ] `:focus-visible` sets an outline (A11Y-03); operator and digit keys use different backgrounds (UI-05)
-- [ ] Grid uses `repeat(4, 1fr)` with no fixed width above 320px (RESP-01); `[data-size]` and overflow rules exist (UI-06)
-- [ ] Gate check passes: `npx vitest run`
-- [ ] Test count: at least 7 new tests
+- [x] Every `--<role>-fg` over `--<role>-bg` pair has contrast >= 4.5 in both themes (A11Y-04)
+- [x] The dark block sits inside `@media (prefers-color-scheme: dark)` (THEME-01)
+- [x] `:focus-visible` sets an outline (A11Y-03); operator and digit keys use different backgrounds (UI-05)
+- [x] Grid uses `repeat(4, 1fr)` with no fixed width above 320px (RESP-01); `[data-size]` and overflow rules exist (UI-06)
+- [x] Gate check passes: `npx vitest run`
+- [x] Test count: at least 7 new tests
 
 **Tests**: unit
 **Gate**: quick
@@ -606,9 +606,9 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] `npm run build` produces `dist/`
-- [ ] Walk: `1 2 × 3 4 5` shows `12 ×` above `345`
-- [ ] Gate check passes: `npm run build; npm run lint; npm run coverage`
+- [x] `npm run build` produces `dist/`
+- [x] Walk: `1 2 × 3 4 5` shows `12 ×` above `345` (done in the final walk, see Handoff)
+- [x] Gate check passes: `npm run build; npm run lint; npm run coverage`
 
 **Tests**: none
 **Gate**: build
@@ -627,8 +627,8 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] README names `npm install && npm run dev`, `npm test`, `npm run coverage`, `npm run lint`, `npm run build`
-- [ ] README explains where `%` sits in the grid and the rounding and exponential limits
+- [x] README names `npm install && npm run dev`, `npm test`, `npm run coverage`, `npm run lint`, `npm run build`
+- [x] README explains where `%` sits in the grid and the rounding and exponential limits
 
 **Tests**: none
 **Gate**: build
@@ -647,12 +647,12 @@ T24 → T25 → T26
 
 **Done when**:
 
-- [ ] QUAL-01 AC1: the seven scripts exist
-- [ ] QUAL-03 AC4: thresholds of 90 are set for `src/core/**`
-- [ ] QUAL-04 AC5: `package.json` has no `dependencies`
-- [ ] QUAL-05 AC6: README mentions how to run, how to test, `%` and the design decisions
-- [ ] Gate check passes: `npm run build; npm run lint; npm run coverage`
-- [ ] Test count: at least 4 new tests
+- [x] QUAL-01 AC1: the seven scripts exist
+- [x] QUAL-03 AC4: thresholds of 90 are set for `src/core/**`
+- [x] QUAL-04 AC5: `package.json` has no `dependencies`
+- [x] QUAL-05 AC6: README mentions how to run, how to test, `%` and the design decisions
+- [x] Gate check passes: `npm run build; npm run lint; npm run coverage`
+- [x] Test count: at least 4 new tests
 
 **Tests**: unit
 **Gate**: build
@@ -858,9 +858,9 @@ Proof: run unit | ✓ EDGE-4
 
 The feature's live state, written as it happens - a compaction gives no warning.
 
-**Settled mid-build:** baseline was red before T1 (no package.json); user chose "Scaffold mínimo antes (Recomendado)" on 2026-11-02. One bootstrap commit made T1, T2, T3 and T5 (git, `.gitignore`, `package.json` with dev dependencies, `tsconfig.json`, `eslint.config.js`) plus placeholder `index.html` and `src/main.ts`. T4 and T6 remain; T22 and T24 replace the placeholders. `npm audit` reports a moderate `minimatch` issue inside eslint (dev only, no runtime dependencies); not forced.
-**Dispatched:** none
-**Walked:** none
+**Settled mid-build:** execution is inline; user: "Inline, eu mesmo, porém não faça nenhum commite nem nada do tipo, depois eu que vou fazer e enviar para o github". No commits from here on: tasks are gated and marked complete in `tasks.md`, and the user commits and pushes. The bootstrap commit `6bd7436` predates this instruction. Baseline was red before T1 (no package.json); user chose "Scaffold mínimo antes (Recomendado)" on 2026-11-02. One bootstrap commit made T1, T2, T3 and T5 (git, `.gitignore`, `package.json` with dev dependencies, `tsconfig.json`, `eslint.config.js`) plus placeholder `index.html` and `src/main.ts`. T4 and T6 remain; T22 and T24 replace the placeholders. `npm audit` reports a moderate `minimatch` issue inside eslint (dev only, no runtime dependencies); not forced.
+**Dispatched:** none (inline execution, no sub-agents)
+**Walked:** Chrome headless against `vite preview` of the build, driven by playwright-core from `/tmp/walk` (outside the project), 2026-11-02. UI story: grid has 21 buttons in the UI-01 order; clicking `1 2 × 3 4 5` shows `12 ×` above `345`; `×` is the only `.active` button until a digit is typed; `5 0 %` shows `0.5`; `2 + 3 = = =` shows `11` with `8 + 3 =` above; `5 ÷ 0 =` shows `Não é possível dividir por zero` inside the display; 15 nines get `data-size=tiny` and fit. Keyboard story on a fresh page: `2 + 3 Enter` shows `2 + 3 =` above `5` and the `=` button gets `pressed`, gone after 250 ms; `Backspace`, `Delete`, `%`, `,` and `/` behave as in the PRD; `Enter` on a focused digit button only clicks that button. A11y story: `aria-live=polite` on the display; Tab shows a solid 3px outline; dark scheme gives `rgb(32, 33, 36)` and light `rgb(248, 249, 250)`; no horizontal scroll at 320, 360, 768 and 1280px. The user reaches each state by running `npm run dev` and doing the same clicks and keys. No capture binds this feature, so no `.running.png` files.
 
 ---
 
