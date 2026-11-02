@@ -1,6 +1,6 @@
 # calculadora proofs
 
-**HEAD**: b009800
+**HEAD**: e16f211
 **Tree**: clean
 **Shell**: /bin/sh
 **Result**: 71 pass, 0 fail
@@ -97,8 +97,8 @@
 
  Test Files  9 passed (9)
       Tests  114 passed (114)
-   Start at  18:02:49
-   Duration  135ms (transform 261ms, setup 0ms, import 334ms, tests 31ms, environment 1ms)
+   Start at  18:05:25
+   Duration  140ms (transform 259ms, setup 0ms, import 335ms, tests 31ms, environment 2ms)
 ```
 
 `npm run build` - exit 0
@@ -116,7 +116,7 @@ dist/index.html                 0.73 kB │ gzip: 0.38 kB
 dist/assets/index-CWWmfhml.css  2.32 kB │ gzip: 0.95 kB
 dist/assets/index-DL7eWzrh.js   6.89 kB │ gzip: 2.75 kB
 
-✓ built in 34ms
+✓ built in 33ms
 ```
 
 `npm run lint` - exit 0
