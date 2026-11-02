@@ -1,9 +1,9 @@
 # calculadora proofs
 
-**HEAD**: dcf30e7
+**HEAD**: b009800
 **Tree**: clean
 **Shell**: /bin/sh
-**Result**: 65 pass, 0 fail
+**Result**: 71 pass, 0 fail
 
 | Check | Proof | Result |
 | --- | --- | --- |
@@ -70,6 +70,12 @@
 | C60 | `run unit / ✓ EDGE-2` | pass |
 | C61 | `run unit / ✓ EDGE-3` | pass |
 | C62 | `run unit / ✓ EDGE-4` | pass |
+| C64 | `run unit / ✓ CTRL-06 AC13 treats % right after an operator as the typed second operand` | pass |
+| C65 | `run unit / ✓ CALC-11 AC18 keeps floating point noise out of results with a large integer part` | pass |
+| C66 | `run unit / ✓ ERR-03 AC12 shows the out of limit message when a chained operator overflows` | pass |
+| C67 | `npm run coverage` | pass |
+| C68 | `walk - Chrome clicks showed 12 × over 345 and one .active button, Multiplicar, until the digit` | pass (Walked) |
+| C69 | `walk - 2 + 3 Enter flashed = and showed 5; Enter on a focused 5 button added one 5 only` | pass (Walked) |
 | Build | `npm run build` | pass |
 | Build | `npm run lint` | pass |
 
@@ -78,9 +84,6 @@
 `Run unit` - exit 0
 
 ```
- ✓ tests/calculator.test.ts > controls > CTRL-04 AC7 keeps 0 when ± is pressed on 0 0ms
- ✓ tests/calculator.test.ts > controls > CTRL-05 AC8 divides the current number by 100 0ms
- ✓ tests/calculator.test.ts > controls > CTRL-05 AC8 turns 50 + 10 % into 50 + 0.1 0ms
  ✓ tests/calculator.test.ts > controls > CTRL-05 AC8 keeps negatives and decimals exact 0ms
  ✓ tests/calculator.test.ts > selectors > UI-03 AC3 shows the pending operation on the secondary line (1 2 × gives 12 ×) 0ms
  ✓ tests/calculator.test.ts > selectors > UI-03 AC3 uses the symbols of the buttons 0ms
@@ -88,11 +91,14 @@
  ✓ tests/calculator.test.ts > selectors > UI-03 AC3 leaves the secondary line empty when idle or in error 0ms
  ✓ tests/calculator.test.ts > selectors > UI-04 AC4 marks the operator only until the next number is typed 0ms
  ✓ tests/calculator.test.ts > selectors > UI-04 AC4 marks no operator when idle or after a result 0ms
+ ✓ tests/calculator.test.ts > modifiers right after an operator > CTRL-06 AC13 treats ± right after an operator as the typed second operand 0ms
+ ✓ tests/calculator.test.ts > modifiers right after an operator > CTRL-06 AC13 treats % right after an operator as the typed second operand 0ms
+ ✓ tests/calculator.test.ts > overflow through a chained operator > ERR-03 AC12 shows the out of limit message when a chained operator overflows 0ms
 
  Test Files  9 passed (9)
-      Tests  109 passed (109)
-   Start at  17:51:23
-   Duration  155ms (transform 274ms, setup 0ms, import 359ms, tests 32ms, environment 1ms)
+      Tests  114 passed (114)
+   Start at  18:02:49
+   Duration  135ms (transform 261ms, setup 0ms, import 334ms, tests 31ms, environment 1ms)
 ```
 
 `npm run build` - exit 0
@@ -108,7 +114,7 @@ rendering chunks...
 computing gzip size...
 dist/index.html                 0.73 kB │ gzip: 0.38 kB
 dist/assets/index-CWWmfhml.css  2.32 kB │ gzip: 0.95 kB
-dist/assets/index-BkLlHO9P.js   6.63 kB │ gzip: 2.66 kB
+dist/assets/index-DL7eWzrh.js   6.89 kB │ gzip: 2.75 kB
 
 ✓ built in 34ms
 ```
@@ -118,4 +124,24 @@ dist/assets/index-BkLlHO9P.js   6.63 kB │ gzip: 2.66 kB
 ```
 > calculadora@0.0.0 lint
 > eslint . --max-warnings 0
+```
+
+`npm run coverage` - exit 0
+
+```
+ % Coverage report from v8
+---------------|---------|----------|---------|---------|-------------------
+File           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------|---------|----------|---------|---------|-------------------
+All files      |   98.29 |    96.93 |     100 |   97.93 |                   
+ calculator.ts |   97.36 |    97.29 |     100 |   96.92 | 30,171            
+ format.ts     |     100 |       95 |     100 |     100 | 42                
+---------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 98.29% ( 115/117 )
+Branches     : 96.93% ( 95/98 )
+Functions    : 100% ( 27/27 )
+Lines        : 97.93% ( 95/97 )
+================================================================================
 ```
