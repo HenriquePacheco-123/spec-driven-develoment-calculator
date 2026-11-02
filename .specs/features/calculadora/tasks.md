@@ -851,6 +851,23 @@ Proof: run unit | ✓ EDGE-3
 
 **C62** - `=` after an error cleared by `C` keeps `0` (Edge case 4)
 Proof: run unit | ✓ EDGE-4
+**C64** - `±` or `%` right after an operator makes the transformed number the second operand (`5 + ± =` shows `0`, `5 + % =` shows `5.05`) (CTRL-06, AC 13)
+Proof: run unit | ✓ CTRL-06 AC13 treats % right after an operator as the typed second operand
+
+**C65** - A result with a large integer part shows no floating point noise (`1000000.1 + 0.2` shows `1000000.3`, not `1.0000003e+6`) (CALC-11, AC 18)
+Proof: run unit | ✓ CALC-11 AC18 keeps floating point noise out of results with a large integer part
+
+**C66** - An overflow reached through a chained operator also shows `Resultado fora do limite` (ERR-03, AC 12)
+Proof: run unit | ✓ ERR-03 AC12 shows the out of limit message when a chained operator overflows
+
+**C67** - `npm run coverage` passes with at least 90% on `src/core/` (QUAL-03, AC 4)
+Proof: `npm run coverage`
+
+**C68** - Clicking `1 2 × 3 4 5` shows `12 ×` above `345`, and `×` stays marked until the first digit of the second number (UI-02, AC 2; UI-04, AC 4)
+Proof: walk - Chrome clicks showed `12 ×` over `345` and one `.active` button, `Multiplicar`, until the digit
+
+**C69** - Pressing a key flashes its button, and `Enter` on a focused button clicks only that button (KEY-04, AC 7; KEY-05, AC 8)
+Proof: walk - `2 + 3 Enter` flashed `=` and showed `5`; `Enter` on a focused `5` button added one `5` only
 
 ---
 
@@ -858,8 +875,8 @@ Proof: run unit | ✓ EDGE-4
 
 The feature's live state, written as it happens - a compaction gives no warning.
 
-**Settled mid-build:** execution is inline; user: "Inline, eu mesmo, porém não faça nenhum commite nem nada do tipo, depois eu que vou fazer e enviar para o github". No commits from here on: tasks are gated and marked complete in `tasks.md`, and the user commits and pushes. The bootstrap commit `6bd7436` predates this instruction. Baseline was red before T1 (no package.json); user chose "Scaffold mínimo antes (Recomendado)" on 2026-11-02. One bootstrap commit made T1, T2, T3 and T5 (git, `.gitignore`, `package.json` with dev dependencies, `tsconfig.json`, `eslint.config.js`) plus placeholder `index.html` and `src/main.ts`. T4 and T6 remain; T22 and T24 replace the placeholders. `npm audit` reports a moderate `minimatch` issue inside eslint (dev only, no runtime dependencies); not forced.
-**Dispatched:** none (inline execution, no sub-agents)
+**Settled mid-build:** Verifier finding F3 settled by the agent as new requirement CTRL-06 (spec AC 13: `±` or `%` right after an operator makes the number the second operand); the user approved that rule on 2026-11-02 - user: "pode aprovar mais não comitta nada". Execution is inline; user: "Inline, eu mesmo, porém não faça nenhum commite nem nada do tipo, depois eu que vou fazer e enviar para o github". No commits from here on: tasks are gated and marked complete in `tasks.md`, and the user commits and pushes. The bootstrap commit `6bd7436` predates this instruction. Baseline was red before T1 (no package.json); user chose "Scaffold mínimo antes (Recomendado)" on 2026-11-02. One bootstrap commit made T1, T2, T3 and T5 (git, `.gitignore`, `package.json` with dev dependencies, `tsconfig.json`, `eslint.config.js`) plus placeholder `index.html` and `src/main.ts`. T4 and T6 remain; T22 and T24 replace the placeholders. `npm audit` reports a moderate `minimatch` issue inside eslint (dev only, no runtime dependencies); not forced.
+**Dispatched:** Verifier round 1 at HEAD `dcf30e7` (sent 2026-11-02; no screens sub-agent, no criterion cites a capture) - returned FAIL with findings F1 to F5; fixed in one pass, closing commit pending (user commits). Execution itself was inline, no batch workers.
 **Walked:** Chrome headless against `vite preview` of the build, driven by playwright-core from `/tmp/walk` (outside the project), 2026-11-02. UI story: grid has 21 buttons in the UI-01 order; clicking `1 2 × 3 4 5` shows `12 ×` above `345`; `×` is the only `.active` button until a digit is typed; `5 0 %` shows `0.5`; `2 + 3 = = =` shows `11` with `8 + 3 =` above; `5 ÷ 0 =` shows `Não é possível dividir por zero` inside the display; 15 nines get `data-size=tiny` and fit. Keyboard story on a fresh page: `2 + 3 Enter` shows `2 + 3 =` above `5` and the `=` button gets `pressed`, gone after 250 ms; `Backspace`, `Delete`, `%`, `,` and `/` behave as in the PRD; `Enter` on a focused digit button only clicks that button. A11y story: `aria-live=polite` on the display; Tab shows a solid 3px outline; dark scheme gives `rgb(32, 33, 36)` and light `rgb(248, 249, 250)`; no horizontal scroll at 320, 360, 768 and 1280px. The user reaches each state by running `npm run dev` and doing the same clicks and keys. No capture binds this feature, so no `.running.png` files.
 
 ---

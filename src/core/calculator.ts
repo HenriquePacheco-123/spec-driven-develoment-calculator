@@ -93,15 +93,19 @@ function backspace(state: CalculatorState): CalculatorState {
 }
 
 function negate(state: CalculatorState): CalculatorState {
-  if (state.currentValue === '0') return state
+  if (Number(state.currentValue) === 0) return state
   const currentValue = state.currentValue.startsWith('-')
     ? state.currentValue.slice(1)
     : `-${state.currentValue}`
-  return { ...state, currentValue }
+  return { ...state, currentValue, waitingForOperand: false }
 }
 
 function percent(state: CalculatorState): CalculatorState {
-  return { ...state, currentValue: formatResult(Number(state.currentValue) / 100) }
+  return {
+    ...state,
+    currentValue: formatResult(Number(state.currentValue) / 100),
+    waitingForOperand: false,
+  }
 }
 
 function reduceAction(state: CalculatorState, action: Action): CalculatorState {

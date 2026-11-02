@@ -246,7 +246,9 @@ describe('error state', () => {
       state = reducer(state, { type: 'equals' })
     }
     expect(state.error).toBe('Resultado fora do limite')
-    expect(reducer(state, { type: 'operator', operator: '+' })).toBe(state)
+    for (const key of ['+', '-', '*', '/', '=', 'NEG', '%', 'BS', 'CE', '.']) {
+      expect(reducer(state, KEY_ACTIONS[key] as Action), key).toBe(state)
+    }
     expect(reducer(state, { type: 'digit', digit: '4' }).currentValue).toBe('4')
   })
 })
@@ -297,6 +299,8 @@ describe('controls', () => {
   it('CTRL-04 AC7 keeps 0 when ± is pressed on 0', () => {
     expect(press('NEG').currentValue).toBe('0')
     expect(press('0', 'NEG').currentValue).toBe('0')
+    expect(press('.', 'NEG').currentValue).toBe('0.')
+    expect(press('0', '.', '0', 'NEG').currentValue).toBe('0.0')
   })
 
   it('CTRL-05 AC8 divides the current number by 100', () => {
@@ -347,5 +351,40 @@ describe('selectors', () => {
   it('UI-04 AC4 marks no operator when idle or after a result', () => {
     expect(activeOperator(initialState)).toBeNull()
     expect(activeOperator(press('2', '+', '3', '='))).toBeNull()
+  })
+})
+
+describe('modifiers right after an operator', () => {
+  it('CTRL-06 AC13 treats ± right after an operator as the typed second operand', () => {
+    const state = press('5', '+', 'NEG')
+    expect(state.currentValue).toBe('-5')
+    expect(state.waitingForOperand).toBe(false)
+    expect(activeOperator(state)).toBeNull()
+    expect(press('5', '+', 'NEG', '=').currentValue).toBe('0')
+  })
+
+  it('CTRL-06 AC13 treats % right after an operator as the typed second operand', () => {
+    const state = press('5', '+', '%')
+    expect(state.currentValue).toBe('0.05')
+    expect(state.waitingForOperand).toBe(false)
+    expect(press('5', '+', '%', '=').currentValue).toBe('5.05')
+  })
+})
+
+describe('overflow through a chained operator', () => {
+  it('ERR-03 AC12 shows the out of limit message when a chained operator overflows', () => {
+    let state = press(...'999999999999999', '*', ...'999999999999999', '=')
+    let lastGood = state
+    for (let i = 0; i < 40 && state.error === null; i += 1) {
+      lastGood = state
+      state = reducer(state, { type: 'equals' })
+    }
+    expect(state.error).toBe('Resultado fora do limite')
+    const chained = press(...'999999999999999', '*', ...'999999999999999', '=')
+    expect(chained.error).toBeNull()
+    let next = reducer(lastGood, { type: 'operator', operator: '*' })
+    for (const digit of '999999999999999') next = reducer(next, { type: 'digit', digit })
+    next = reducer(next, { type: 'operator', operator: '*' })
+    expect(next.error).toBe('Resultado fora do limite')
   })
 })

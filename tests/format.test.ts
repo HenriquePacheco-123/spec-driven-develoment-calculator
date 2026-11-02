@@ -20,6 +20,13 @@ describe('formatResult', () => {
     expect(formatResult(0.0000001)).toBe('0.0000001')
   })
 
+  it('CALC-11 AC18 keeps floating point noise out of results with a large integer part', () => {
+    expect(formatResult(1000000.1 + 0.2)).toBe('1000000.3')
+    expect(formatResult(1234567890 + 0.12345)).toBe('1234567890.12345')
+    expect(formatResult(123456.789 * 1)).toBe('123456.789')
+    expect(formatResult(99999.99 + 0.01)).toBe('100000')
+  })
+
   it('EDGE-3 shows 1 ÷ 3 as 0.3333333333', () => {
     expect(formatResult(1 / 3)).toBe('0.3333333333')
   })
@@ -57,6 +64,7 @@ describe('displaySize', () => {
 
   it('UI-06 AC6 shrinks the font as the text grows', () => {
     expect(displaySize('1234567890')).toBe('small')
+    expect(displaySize('-123456789.12')).toBe('small')
     expect(displaySize('-123456789.123')).toBe('tiny')
     expect(displaySize('123456789012345')).toBe('tiny')
   })

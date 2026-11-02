@@ -81,8 +81,15 @@ describe('style.css', () => {
     expect(rule('.key--equals')).toContain('var(--equals-bg)')
   })
 
+  it('A11Y-04 AC4 uses each foreground and background pair in a rule', () => {
+    for (const role of ROLES) {
+      expect(css, `${role}-fg`).toContain(`var(--${role}-fg)`)
+      expect(css, `${role}-bg`).toContain(`var(--${role}-bg)`)
+    }
+  })
+
   it('A11Y-03 AC3 draws an outline on keyboard focus', () => {
-    expect(rule('.key:focus-visible')).toMatch(/outline:\s*[^;]*\d+px/)
+    expect(rule('.key:focus-visible')).toMatch(/outline:\s*(?!none)\d+px\s+solid/)
   })
 
   it('RESP-01 AC5 lays the keys out in four fractional columns', () => {
@@ -91,10 +98,18 @@ describe('style.css', () => {
   })
 
   it('RESP-01 AC5 sets no fixed width wider than 320px', () => {
-    const widths = [...css.matchAll(/(?:^|[\s;{])(?:min-)?width:\s*([\d.]+)(px|rem)\s*;/g)]
-    for (const [, amount, unit] of widths) {
-      const px = Number(amount) * (unit === 'rem' ? 16 : 1)
-      expect(px).toBeLessThanOrEqual(320)
+    const declarations = [...css.matchAll(/(?:^|[\s;{])(?:min-)?width:\s*([^;]+);/g)].map((match) =>
+      (match[1] ?? '').trim(),
+    )
+    expect(declarations.length).toBeGreaterThan(0)
+    for (const value of declarations) {
+      const fixed = /^([\d.]+)(px|rem)$/.exec(value)
+      if (fixed) {
+        const px = Number(fixed[1]) * (fixed[2] === 'rem' ? 16 : 1)
+        expect(px, value).toBeLessThanOrEqual(320)
+      } else {
+        expect(value, value).toContain('100%')
+      }
     }
     expect(rule('.calculator')).toContain('width: min(100%')
   })

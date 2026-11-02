@@ -39,6 +39,7 @@ Construir uma calculadora web de quatro operações em TypeScript, usada pelo mo
 | `⌫` em número de um dígito, ou `-5` | Resulta em `0` | Display nunca fica vazio | n |
 | `⌫` logo após um resultado | Sem efeito | O resultado não é um número digitado | n |
 | `CE` logo após um resultado | Age como `C` | Não há entrada a limpar | n |
+| `±` ou `%` logo depois de um operador | O número transformado vira o segundo operando (`waitingForOperand` falso) | Achado F3 do Verifier; a spec era omissa. Aprovado pelo usuário em 2026-11-02 - user: "pode aprovar mais não comitta nada" | y |
 | Limite de 15 dígitos | Conta só dígitos; sinal e ponto não contam | PRD diz "15 dígitos" | n |
 | Resultado não finito | Erro `Resultado fora do limite`, mesmo bloqueio da divisão por zero | `Infinity` não pode aparecer no display; pedido pelo usuário em 2026-11-02 | y |
 | Resultado com mais de 15 dígitos | Notação exponencial com até 10 casas (`1.2345678901e+20`) | Cabe no display sem quebrar o layout | n |
@@ -106,6 +107,7 @@ Construir uma calculadora web de quatro operações em TypeScript, usada pelo mo
 10. WHILE há erro, the system SHALL ignorar operadores, `=`, `±`, `%`, `⌫` e `CE` <!-- ERR-02 -->
 11. WHILE há erro, WHEN o usuário aciona `C` ou digita um número THEN the system SHALL limpar o erro, e o dígito digitado inicia um novo cálculo <!-- ERR-02 -->
 12. IF uma operação resulta em valor não finito (`Infinity`) THEN the system SHALL exibir `Resultado fora do limite` e tratar como o erro de divisão por zero <!-- ERR-03 -->
+13. WHEN o usuário aciona `±` ou `%` logo depois de um operador THEN the system SHALL tratar o número transformado como o segundo operando, e o operador deixa de ficar marcado (`5 + ± =` mostra `0`, `5 + % =` mostra `5.05`) <!-- CTRL-06 -->
 
 **Independent Test**: Rodar os testes de controles e erro em `tests/calculator.test.ts`.
 
@@ -223,6 +225,7 @@ Construir uma calculadora web de quatro operações em TypeScript, usada pelo mo
 | ERR-01 | P1: Controles | Execute | Implemented |
 | ERR-02 | P1: Controles | Execute | Implemented |
 | ERR-03 | P1: Controles | Execute | Implemented |
+| CTRL-06 | P1: Controles | Execute | Implemented |
 | UI-01 | P1: Interface | Execute | Implemented |
 | UI-02 | P1: Interface | Execute | Implemented |
 | UI-03 | P1: Interface | Execute | Implemented |
@@ -246,7 +249,7 @@ Construir uma calculadora web de quatro operações em TypeScript, usada pelo mo
 | QUAL-04 | P2: Qualidade | Execute | Implemented |
 | QUAL-05 | P2: Qualidade | Execute | Implemented |
 
-**Coverage:** 43 total, 43 mapped to tasks, 0 unmapped. All implemented; waiting for proofs and the Verifier.
+**Coverage:** 44 total, 44 mapped to tasks, 0 unmapped. All implemented; waiting for proofs and the Verifier.
 
 ---
 
